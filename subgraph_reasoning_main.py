@@ -36,9 +36,9 @@ OPTIMIZED_KG_DIR = '<path/to/optimized_kg_results>'
 BASE_KG_PATH = '<path/to/kg.json>'
 
 # Model configuration
-MODEL_NAME = "qwen2.5:7b"
+MODEL_NAME = " "
 USE_THINKING_MODE = False
-OLLAMA_HOST = 'http://127.0.0.1:11434'
+OLLAMA_HOST = ' '
 
 # Subgraph construction parameters
 FEATURE_DETECTION_THRESHOLD = 0.55
