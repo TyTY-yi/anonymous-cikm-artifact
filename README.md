@@ -188,7 +188,7 @@ Set the following paths in `subgraph_reasoning_main.py`:
     DATA_DIR = "<path/to/processed_data>"
     OPTIMIZED_KG_DIR = "<path/to/optimized_kg_results>"
     BASE_KG_PATH = "kg/cams_kg.json"
-    MODEL_NAME = "qwen2.5:7b"
+    MODEL_NAME = "model_name"
 
 Make sure Ollama is running locally:
 
