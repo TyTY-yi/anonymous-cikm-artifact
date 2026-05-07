@@ -102,7 +102,7 @@ The script `kg_schema_generator.py` provides a reference implementation of the t
 
 For the CAMS experiments, we provide the anonymized constructed KG directly at:
 
-cams_kg.json
+    cams_kg.json
 
 The construction process consists of:
 
