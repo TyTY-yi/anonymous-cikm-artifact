@@ -64,7 +64,7 @@ We provide the anonymized CAMS knowledge graph used in the experiments at:
 
     cams_kg.json
 
-The graph contains label, semantic, and feature nodes connected by initial binary-prior edges. Edge weights are not manually assigned; they are learned during graph optimization.
+The graph contains label, semantic, and feature nodes connected by initial binary-prior edges. 
 
 The script `kg_schema_generator.py` documents the two-stage LLM-assisted KG construction protocol used to create task-specific heterogeneous knowledge graphs. It is included to make the construction procedure transparent and inspectable.
 
