@@ -26,7 +26,10 @@ Install the required Python packages:
 
 LLM inference is run locally through Ollama. Install Ollama and pull the required model before running inference:
 
-    ollama pull qwen2.5:7b, llama3:8b, mistral:7b, gemma:7b
+    ollama pull qwen2.5:7b
+    ollama pull llama3:8b
+    ollama pull mistral:7b
+    ollama pull gemma:7b
 
 The embedding model used in preprocessing and KG encoding is:
 
