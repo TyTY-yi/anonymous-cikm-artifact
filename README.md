@@ -1,7 +1,5 @@
 
-This repository provides the anonymous implementation and reproducibility materials for **Psy-GRAG**, an evidence-based subgraph-augmented reasoning framework for mental health attribution classification.
-
-Psy-GRAG constructs task-specific heterogeneous knowledge graphs, optimizes graph edge weights through supervised training, retrieves input-adaptive evidence subgraphs, and uses the resulting structured evidence to support LLM-assisted classification.
+This repository provides the anonymous implementation and reproducibility materials for **Psy-GRAG**.
 
 ---
 
@@ -13,8 +11,7 @@ Psy-GRAG constructs task-specific heterogeneous knowledge graphs, optimizes grap
     ├── kg_encode.py                  # Node encoding and adjacency matrix construction
     ├── kg_optimizer.py               # Multi-round Gumbel-Sigmoid edge weight optimization
     ├── subgraph_reasoning_main.py    # Evidence subgraph retrieval and LLM-assisted classification
-    ├── kg/
-    │   └── cams_kg.json              # Anonymized CAMS knowledge graph used in the experiments
+    ├── cams_kg.json                 # CAMS knowledge graph used in the experiments
     └── README.md
 
 ---
@@ -29,7 +26,7 @@ Install the required Python packages:
 
 LLM inference is run locally through Ollama. Install Ollama and pull the required model before running inference:
 
-    ollama pull qwen2.5:7b
+    ollama pull qwen2.5:7b, llama3:8b, mistral:7b, gemma:7b
 
 The embedding model used in preprocessing and KG encoding is:
 
@@ -40,17 +37,6 @@ The embedding model used in preprocessing and KG encoding is:
 ## Datasets
 
 We evaluate Psy-GRAG on publicly available mental health text classification datasets.
-
-Download each dataset and place it in a directory containing:
-
-    training.csv
-    testing.csv
-    validation.csv
-
-The expected input files should contain at least:
-
-    text
-    label
 
 ### CAMS
 
@@ -76,7 +62,7 @@ Multi-label wellness dimension classification dataset.
 
 We provide the anonymized CAMS knowledge graph used in the experiments at:
 
-    kg/cams_kg.json
+    cams_kg.json
 
 The graph contains label, semantic, and feature nodes connected by initial binary-prior edges. Edge weights are not manually assigned; they are learned during graph optimization.
 
@@ -126,7 +112,7 @@ Expected outputs:
 
 For CAMS, the anonymized knowledge graph is already provided:
 
-    kg/cams_kg.json
+    cams_kg.json
 
 To inspect or reproduce the construction protocol, see:
 
@@ -237,33 +223,10 @@ Expected outputs include:
 
 ---
 
-## Reproducibility Notes
-
-- All dataset splits are controlled by a fixed random seed.
-- Text embeddings are generated with MentalBERT.
-- The CAMS knowledge graph is provided in anonymized form.
-- Initial KG edges are binary priors; optimized edge weights are learned during graph optimization.
-- The final LLM classifier is frozen during inference.
-- Local LLM inference is performed through Ollama using `qwen2.5:7b`.
-
----
-
 ## Anonymity
 
 This repository is prepared for anonymous peer review. It does not include author names, affiliations, acknowledgments, institutional paths, or non-anonymized project metadata.
-
-Before submission, we recommend checking the repository with:
-
-    grep -RniE "author|university|gmail|edu|github|wandb|/home/|/Users/|acknowledg|grant|lab|project" .
-    git log --all --format='%an <%ae>' | sort -u
-
 ---
 
-## Citation
 
-Citation information will be added after the review process.
-"""
 
-path = Path("/mnt/data/README.md")
-path.write_text(readme, encoding="utf-8")
-path.as_posix()
