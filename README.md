@@ -129,7 +129,7 @@ This step encodes all KG nodes using MentalBERT and builds adjacency matrices fo
 
 Set the following paths in `kg_encode.py`:
 
-    INPUT_KG_PATH = "kg/cams_kg.json"
+    INPUT_KG_PATH = "<path/to/input_data>"
     OUTPUT_DIR = "<path/to/processed_data>"
 
 Run:
