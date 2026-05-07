@@ -110,15 +110,11 @@ Expected outputs:
 
 ## Step 2: Knowledge Graph Construction
 
-For CAMS, the anonymized knowledge graph is already provided:
+The script `kg_schema_generator.py` provides a reference implementation of the two-stage LLM-assisted KG construction protocol. Because the graph schema and label definitions are dataset-specific, the prompts and configuration should be adapted to the target dataset before constructing a new KG. 
 
-    cams_kg.json
+For the CAMS experiments, we provide the anonymized constructed KG directly at `cams_kg.json`.
 
-To inspect or reproduce the construction protocol, see:
-
-    kg_schema_generator.py
-
-The script describes a two-stage LLM-assisted construction process:
+The construction process consists of:
 
 1. **Stage I:** Generate label nodes, semantic nodes, feature nodes, and inter-layer edges.
 2. **Stage II:** Add feature-to-feature relational edges and shortcut feature-to-label edges.
