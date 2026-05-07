@@ -224,9 +224,8 @@ Expected outputs include:
 ---
 
 ## Anonymity
-
 This repository is prepared for anonymous peer review. It does not include author names, affiliations, acknowledgments, institutional paths, or non-anonymized project metadata.
----
+
 
 
 
