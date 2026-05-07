@@ -1,0 +1,3893 @@
+{
+  "metadata": {
+    "dataset": "CAMS",
+    "graph_type": "3-layer heterogeneous knowledge graph",
+    "purpose": "Mental health attribution analysis and classification",
+    "theoretical_frameworks": [
+      "Attribution Theory",
+      "Minority Stress Model",
+      "Job Demands-Resources Model",
+      "Biopsychosocial Model",
+      "Attachment Theory",
+      "Existential Psychology"
+    ],
+    "edge_weights": "NONE - will be learned during training"
+  },
+  "label_nodes": [
+    {
+      "label_id": "CL001",
+      "label_name": "no_reason",
+      "label_code": 0,
+      "display_name": "No Reason",
+      "definition": "No identifiable cause or reason for mental distress is mentioned in the text",
+      "characteristics": "Vague expressions, multiple unclear factors, inability to pinpoint cause, complex etiology",
+      "clinical_significance": "May indicate alexithymia, complex multi-factorial causation, or early-stage awareness",
+      "theoretical_basis": [
+        "Attribution Theory",
+        "Complexity Theory"
+      ]
+    },
+    {
+      "label_id": "CL002",
+      "label_name": "bias_or_abuse",
+      "label_code": 1,
+      "display_name": "Bias or Abuse",
+      "definition": "Mental distress caused by discrimination, prejudice, abuse, or social mistreatment",
+      "characteristics": "Victimization, oppression, body shaming, physical/emotional/sexual abuse, bullying",
+      "clinical_significance": "Trauma-related disorders, PTSD, social anxiety from mistreatment, identity-based stress",
+      "theoretical_basis": [
+        "Minority Stress Model",
+        "Social Identity Theory",
+        "Trauma Theory"
+      ]
+    },
+    {
+      "label_id": "CL003",
+      "label_name": "jobs_and_careers",
+      "label_code": 2,
+      "display_name": "Jobs and Careers",
+      "definition": "Mental distress caused by occupational, financial, or educational problems",
+      "characteristics": "Unemployment, financial crisis, workplace stress, academic failure, career dissatisfaction",
+      "clinical_significance": "Adjustment disorders, burnout, occupational stress disorders, economic distress",
+      "theoretical_basis": [
+        "Job Demands-Resources Model",
+        "Socioeconomic Stress Theory",
+        "Burnout Theory"
+      ]
+    },
+    {
+      "label_id": "CL004",
+      "label_name": "medication",
+      "label_code": 3,
+      "display_name": "Medication",
+      "definition": "Mental distress caused by medical conditions, medications, or substance use",
+      "characteristics": "Drug side effects, substance abuse, chronic illness, physical health problems",
+      "clinical_significance": "Medical comorbidity, substance-induced disorders, iatrogenic effects, dual diagnosis",
+      "theoretical_basis": [
+        "Biopsychosocial Model",
+        "Substance Use Disorder Theory",
+        "Medical Comorbidity Framework"
+      ]
+    },
+    {
+      "label_id": "CL005",
+      "label_name": "relationship",
+      "label_code": 4,
+      "display_name": "Relationship",
+      "definition": "Mental distress caused by interpersonal relationship problems",
+      "characteristics": "Breakups, divorce, betrayal, family conflict, attachment issues, childhood trauma",
+      "clinical_significance": "Relational trauma, attachment disorders, interpersonal dysfunction, developmental trauma",
+      "theoretical_basis": [
+        "Attachment Theory",
+        "Interpersonal Theory of Depression",
+        "Family Systems Theory"
+      ]
+    },
+    {
+      "label_id": "CL006",
+      "label_name": "alienation",
+      "label_code": 5,
+      "display_name": "Alienation",
+      "definition": "Mental distress caused by existential crisis, isolation, and meaninglessness",
+      "characteristics": "Loneliness, social isolation, lack of purpose, existential void, disconnection",
+      "clinical_significance": "Existential depression, anomie, social isolation syndrome, identity crisis",
+      "theoretical_basis": [
+        "Existential Psychology",
+        "Anomie Theory (Durkheim)",
+        "Social Isolation Theory"
+      ]
+    }
+  ],
+  "semantic_nodes": [
+    {
+      "semantic_id": "AC001",
+      "semantic_name": "social_mistreatment_semantic",
+      "display_name": "Social Mistreatment semantic",
+      "definition": "Discrimination, prejudice, abuse, and negative social treatment as causes of mental distress",
+      "theoretical_basis": [
+        "Social Identity Theory",
+        "Minority Stress Model",
+        "Trauma Theory"
+      ],
+      "primary_label": "bias_or_abuse",
+      "secondary_labels": [
+        "alienation"
+      ],
+      "mediates": "Social mistreatment features to bias_or_abuse attribution"
+    },
+    {
+      "semantic_id": "AC002",
+      "semantic_name": "professional_economic_semantic",
+      "display_name": "Professional & Economic semantic",
+      "definition": "Occupational stress, financial problems, and career-related causes of mental distress",
+      "theoretical_basis": [
+        "Job Demands-Resources Model",
+        "Socioeconomic Status Theory",
+        "Burnout Theory"
+      ],
+      "primary_label": "jobs_and_careers",
+      "secondary_labels": [
+        "alienation",
+        "no_reason"
+      ],
+      "mediates": "Professional/economic features to jobs_and_careers attribution"
+    },
+    {
+      "semantic_id": "AC003",
+      "semantic_name": "medical_substance_semantic",
+      "display_name": "Medical & Substance semantic",
+      "definition": "Physical health, medical conditions, and substance-related causes of mental distress",
+      "theoretical_basis": [
+        "Biopsychosocial Model",
+        "Substance Use Disorder Theory",
+        "Medical Comorbidity Framework"
+      ],
+      "primary_label": "medication",
+      "secondary_labels": [
+        "no_reason"
+      ],
+      "mediates": "Medical/substance features to medication attribution"
+    },
+    {
+      "semantic_id": "AC004",
+      "semantic_name": "interpersonal_conflict_semantic",
+      "display_name": "Interpersonal Conflict semantic",
+      "definition": "Relationship problems, family conflicts, and interpersonal trauma as causes of mental distress",
+      "theoretical_basis": [
+        "Attachment Theory",
+        "Interpersonal Theory of Depression",
+        "Family Systems Theory"
+      ],
+      "primary_label": "relationship",
+      "secondary_labels": [
+        "alienation",
+        "no_reason"
+      ],
+      "mediates": "Interpersonal conflict features to relationship attribution"
+    },
+    {
+      "semantic_id": "AC005",
+      "semantic_name": "existential_isolation_semantic",
+      "display_name": "Existential & Isolation semantic",
+      "definition": "Loneliness, meaninglessness, and existential crises as causes of mental distress",
+      "theoretical_basis": [
+        "Existential Psychology",
+        "Anomie Theory",
+        "Social Isolation Theory"
+      ],
+      "primary_label": "alienation",
+      "secondary_labels": [
+        "no_reason"
+      ],
+      "mediates": "Existential/isolation features to alienation attribution"
+    },
+    {
+      "semantic_id": "AC006",
+      "semantic_name": "unclear_multifactorial_semantic",
+      "display_name": "Unclear & Multifactorial semantic",
+      "definition": "Complex, unclear, or multiple interacting causes of mental distress",
+      "theoretical_basis": [
+        "Complexity Theory",
+        "Diathesis-Stress Model",
+        "Biopsychosocial Model"
+      ],
+      "primary_label": "no_reason",
+      "secondary_labels": [],
+      "mediates": "Complex/unclear features to no_reason attribution"
+    }
+  ],
+  "feature_nodes": [
+    {
+      "feature_id": "AF001",
+      "feature_name": "discrimination_experience",
+      "display_name": "Discrimination Experience",
+      "definition": "Experience of unfair treatment based on identity characteristics",
+      "informal_expressions": [
+        "discriminated against",
+        "treated unfairly because I'm",
+        "prejudice",
+        "they hate me for being",
+        "judged for who I am",
+        "bias against me",
+        "singled out",
+        "targeted",
+        "excluded because",
+        "racism",
+        "sexism",
+        "homophobia",
+        "ableism",
+        "ageism"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": false
+    },
+    {
+      "feature_id": "AF002",
+      "feature_name": "body_shaming",
+      "display_name": "Body Shaming",
+      "definition": "Criticism, mockery, or humiliation directed at physical appearance",
+      "informal_expressions": [
+        "fat shaming",
+        "body shamed",
+        "called ugly",
+        "made fun of my weight",
+        "criticized my looks",
+        "judged for appearance",
+        "people stare at me",
+        "bullied for my size",
+        "skinny shaming",
+        "told I'm unattractive",
+        "body dysmorphia triggers",
+        "comments about my body"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": true
+    },
+    {
+      "feature_id": "AF003",
+      "feature_name": "physical_abuse",
+      "display_name": "Physical Abuse",
+      "definition": "Intentional use of physical force causing injury or trauma",
+      "informal_expressions": [
+        "hit me",
+        "physically abused",
+        "beaten",
+        "slapped",
+        "punched",
+        "kicked",
+        "choked",
+        "thrown objects at",
+        "physical violence",
+        "assaulted",
+        "battered",
+        "domestic violence",
+        "bruises",
+        "broken bones"
+      ],
+      "valence": "negative",
+      "severity": "very_high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": true
+    },
+    {
+      "feature_id": "AF004",
+      "feature_name": "emotional_abuse",
+      "display_name": "Emotional Abuse",
+      "definition": "Psychological manipulation, verbal attacks, and emotional cruelty",
+      "informal_expressions": [
+        "emotionally abused",
+        "gaslighting",
+        "manipulated",
+        "constant criticism",
+        "belittled",
+        "called names",
+        "yelled at",
+        "made to feel worthless",
+        "controlled",
+        "mind games",
+        "emotional blackmail",
+        "silent treatment",
+        "invalidated feelings"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": false
+    },
+    {
+      "feature_id": "AF005",
+      "feature_name": "sexual_abuse",
+      "display_name": "Sexual Abuse",
+      "definition": "Non-consensual sexual contact, harassment, or exploitation",
+      "informal_expressions": [
+        "sexually abused",
+        "molested",
+        "raped",
+        "assaulted sexually",
+        "coerced into sex",
+        "unwanted touching",
+        "sexual harassment",
+        "groped",
+        "exposed to",
+        "traumatic sexual experience",
+        "childhood sexual abuse",
+        "date rape",
+        "sexual trauma"
+      ],
+      "valence": "negative",
+      "severity": "very_high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": false
+    },
+    {
+      "feature_id": "AF006",
+      "feature_name": "social_exclusion",
+      "display_name": "Social Exclusion",
+      "definition": "Being deliberately left out, ignored, or ostracized from social groups",
+      "informal_expressions": [
+        "left out",
+        "excluded",
+        "ostracized",
+        "ignored",
+        "no one includes me",
+        "not invited",
+        "rejected",
+        "cast out",
+        "socially isolated",
+        "people avoid me",
+        "feel invisible",
+        "loner",
+        "outcast",
+        "pariah"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": true
+    },
+    {
+      "feature_id": "AF007",
+      "feature_name": "bullying_harassment",
+      "display_name": "Bullying & Harassment",
+      "definition": "Repeated aggressive behavior intended to harm, intimidate, or dominate",
+      "informal_expressions": [
+        "bullied",
+        "harassed",
+        "picked on",
+        "teased relentlessly",
+        "cyberbullied",
+        "tormented",
+        "intimidated",
+        "threatened",
+        "mocked",
+        "made fun of",
+        "gang up on me",
+        "spread rumors about",
+        "humiliated"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": true
+    },
+    {
+      "feature_id": "AF008",
+      "feature_name": "stigma_experience",
+      "display_name": "Stigma Experience",
+      "definition": "Social disapproval or prejudice associated with personal characteristics or conditions",
+      "informal_expressions": [
+        "stigmatized",
+        "looked down upon",
+        "judged for mental illness",
+        "ashamed of my condition",
+        "people treat me differently",
+        "mental health stigma",
+        "discrimination for being sick",
+        "labeled crazy",
+        "stereotyped",
+        "prejudice against my illness"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": false
+    },
+    {
+      "feature_id": "AF009",
+      "feature_name": "microaggressions",
+      "display_name": "Microaggressions",
+      "definition": "Subtle, often unintentional discriminatory comments or behaviors",
+      "informal_expressions": [
+        "microaggressions",
+        "backhanded compliments",
+        "subtle racism",
+        "coded language",
+        "you're so articulate",
+        "where are you really from",
+        "you don't act like",
+        "assumptions about me",
+        "subtle sexism",
+        "unconscious bias",
+        "implicit discrimination"
+      ],
+      "valence": "negative",
+      "severity": "low",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": false
+    },
+    {
+      "feature_id": "AF010",
+      "feature_name": "hate_speech",
+      "display_name": "Hate Speech",
+      "definition": "Verbal or written attacks targeting specific group identities",
+      "informal_expressions": [
+        "hate speech",
+        "slurs",
+        "racist comments",
+        "homophobic remarks",
+        "transphobic language",
+        "hateful messages",
+        "online hate",
+        "bigoted comments",
+        "derogatory terms",
+        "xenophobic speech",
+        "antisemitic remarks",
+        "Islamophobic comments"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": true
+    },
+    {
+      "feature_id": "AF011",
+      "feature_name": "workplace_discrimination",
+      "display_name": "Workplace Discrimination",
+      "definition": "Unfair treatment in employment settings based on protected characteristics",
+      "informal_expressions": [
+        "discriminated at work",
+        "passed over for promotion",
+        "unequal pay",
+        "hostile work environment",
+        "treated differently at work",
+        "workplace bias",
+        "fired unfairly",
+        "not hired because of",
+        "glass ceiling",
+        "workplace harassment",
+        "retaliation at work"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": true
+    },
+    {
+      "feature_id": "AF012",
+      "feature_name": "invalidation_experience",
+      "display_name": "Invalidation Experience",
+      "definition": "Having one's feelings, experiences, or identity dismissed or trivialized",
+      "informal_expressions": [
+        "feelings invalidated",
+        "told I'm overreacting",
+        "it's all in your head",
+        "just get over it",
+        "dramatic",
+        "too sensitive",
+        "making it up",
+        "exaggerating",
+        "not that bad",
+        "other people have it worse",
+        "minimized my pain",
+        "gaslighted about my feelings"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": false
+    },
+    {
+      "feature_id": "AF013",
+      "feature_name": "victim_blaming",
+      "display_name": "Victim Blaming",
+      "definition": "Holding victims responsible for harm inflicted upon them",
+      "informal_expressions": [
+        "blamed for what happened",
+        "asked what I was wearing",
+        "told I provoked it",
+        "should have known better",
+        "it's my fault",
+        "why didn't you leave",
+        "you should have",
+        "victim shaming",
+        "blamed for abuse",
+        "held responsible for trauma"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": false
+    },
+    {
+      "feature_id": "AF014",
+      "feature_name": "social_ostracism",
+      "display_name": "Social Ostracism",
+      "definition": "Complete social rejection and exclusion from community",
+      "informal_expressions": [
+        "completely rejected",
+        "shunned",
+        "excommunicated",
+        "cut off from everyone",
+        "total social isolation",
+        "no one talks to me",
+        "treated like I don't exist",
+        "social death",
+        "pariah status",
+        "complete outcast",
+        "banished from social circles"
+      ],
+      "valence": "negative",
+      "severity": "very_high",
+      "primary_semantic": "AC001",
+      "feature_type": "social",
+      "observable": true
+    },
+    {
+      "feature_id": "AF015",
+      "feature_name": "unemployment",
+      "display_name": "Unemployment",
+      "definition": "Loss of employment and associated financial insecurity",
+      "informal_expressions": [
+        "lost my job",
+        "unemployed",
+        "got fired",
+        "laid off",
+        "jobless",
+        "can't find work",
+        "terminated",
+        "downsized",
+        "redundancy",
+        "out of work",
+        "between jobs",
+        "career setback",
+        "professional failure"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF016",
+      "feature_name": "financial_crisis",
+      "display_name": "Financial Crisis",
+      "definition": "Severe financial difficulties, debt, or economic hardship",
+      "informal_expressions": [
+        "broke",
+        "in debt",
+        "financial ruin",
+        "can't pay bills",
+        "eviction notice",
+        "bankruptcy",
+        "foreclosure",
+        "drowning in debt",
+        "financial stress",
+        "money problems",
+        "poverty",
+        "homelessness",
+        "economic hardship"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF017",
+      "feature_name": "workplace_bullying",
+      "display_name": "Workplace Bullying",
+      "definition": "Repeated mistreatment, intimidation, or humiliation in workplace",
+      "informal_expressions": [
+        "bullied at work",
+        "toxic workplace",
+        "boss yells at me",
+        "colleagues gang up",
+        "workplace harassment",
+        "professional sabotage",
+        "undermined at work",
+        "humiliated at office",
+        "professional mobbing",
+        "career sabotage",
+        "workplace intimidation"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF018",
+      "feature_name": "job_dissatisfaction",
+      "display_name": "Job Dissatisfaction",
+      "definition": "Profound unhappiness with current employment situation",
+      "informal_expressions": [
+        "hate my job",
+        "job sucks",
+        "career regret",
+        "wasting my life at work",
+        "meaningless job",
+        "dead-end job",
+        "unfulfilling work",
+        "trapped in this job",
+        "career disappointment",
+        "professional stagnation",
+        "job misery",
+        "workplace dread"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF019",
+      "feature_name": "academic_failure",
+      "display_name": "Academic Failure",
+      "definition": "Poor academic performance, failing grades, or educational setbacks",
+      "informal_expressions": [
+        "failed exams",
+        "flunking out",
+        "academic probation",
+        "dropping out",
+        "bad grades",
+        "can't keep up",
+        "academic disappointment",
+        "failed classes",
+        "education failure",
+        "let down my family",
+        "academic shame",
+        "college dropout"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF020",
+      "feature_name": "academic_pressure",
+      "display_name": "Academic Pressure",
+      "definition": "Intense stress from educational expectations and performance demands",
+      "informal_expressions": [
+        "academic pressure",
+        "parental expectations",
+        "pressure to succeed",
+        "perfect grades",
+        "ivy league pressure",
+        "test anxiety",
+        "fear of failure",
+        "academic stress",
+        "overwhelmed with school",
+        "can't meet expectations",
+        "educational burnout",
+        "study stress"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF021",
+      "feature_name": "burnout_experience",
+      "display_name": "Burnout Experience",
+      "definition": "Physical, emotional, and mental exhaustion from prolonged stress",
+      "informal_expressions": [
+        "burnt out",
+        "exhausted from work",
+        "no energy for anything",
+        "work burnout",
+        "professional exhaustion",
+        "career fatigue",
+        "can't keep going",
+        "drained from work",
+        "empty tank",
+        "professional depletion",
+        "work-related exhaustion"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF022",
+      "feature_name": "work_life_imbalance",
+      "display_name": "Work-Life Imbalance",
+      "definition": "Excessive work demands interfering with personal life and well-being",
+      "informal_expressions": [
+        "no work-life balance",
+        "always working",
+        "never see family",
+        "married to my job",
+        "work consumes me",
+        "no time for myself",
+        "overworked",
+        "too many hours",
+        "job takes everything",
+        "professional slavery",
+        "career over personal life"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF023",
+      "feature_name": "career_stagnation",
+      "display_name": "Career Stagnation",
+      "definition": "Lack of professional growth, advancement, or development opportunities",
+      "informal_expressions": [
+        "stuck in my career",
+        "no promotion",
+        "dead-end job",
+        "career plateau",
+        "professional stagnation",
+        "going nowhere",
+        "wasted potential",
+        "career frustration",
+        "unfulfilled ambitions",
+        "professional disappointment",
+        "career limbo"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF024",
+      "feature_name": "job_insecurity",
+      "display_name": "Job Insecurity",
+      "definition": "Fear of losing employment or unstable work conditions",
+      "informal_expressions": [
+        "afraid of losing job",
+        "job insecurity",
+        "contract ending",
+        "position elimination",
+        "company downsizing",
+        "fear of layoffs",
+        "unstable employment",
+        "temporary position",
+        "uncertain future",
+        "professional instability",
+        "worried about job loss"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF025",
+      "feature_name": "financial_stress",
+      "display_name": "Financial Stress",
+      "definition": "Persistent anxiety about money and financial stability",
+      "informal_expressions": [
+        "financial stress",
+        "money worries",
+        "can't make ends meet",
+        "living paycheck to paycheck",
+        "financial anxiety",
+        "money problems",
+        "economic stress",
+        "financial pressure",
+        "debt stress",
+        "money troubles",
+        "financial insecurity"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF026",
+      "feature_name": "hostile_work_environment",
+      "display_name": "Hostile Work Environment",
+      "definition": "Workplace characterized by intimidation, harassment, or discrimination",
+      "informal_expressions": [
+        "toxic workplace",
+        "hostile environment",
+        "unbearable work conditions",
+        "office politics",
+        "backstabbing colleagues",
+        "competitive workplace",
+        "cutthroat environment",
+        "workplace toxicity",
+        "unhealthy work culture",
+        "abusive management",
+        "professional hostility"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF027",
+      "feature_name": "career_change_stress",
+      "display_name": "Career Change Stress",
+      "definition": "Anxiety and uncertainty associated with major professional transitions",
+      "informal_expressions": [
+        "career change stress",
+        "starting over",
+        "midlife career crisis",
+        "changing professions",
+        "uncertain career path",
+        "professional transition",
+        "career uncertainty",
+        "finding my path",
+        "career confusion",
+        "professional identity crisis"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF028",
+      "feature_name": "entrepreneurial_failure",
+      "display_name": "Entrepreneurial Failure",
+      "definition": "Business failure, startup collapse, or professional venture disappointment",
+      "informal_expressions": [
+        "business failed",
+        "startup collapsed",
+        "lost my business",
+        "entrepreneurial failure",
+        "bankrupt business",
+        "failed venture",
+        "professional dreams crushed",
+        "business ruin",
+        "entrepreneurial disappointment",
+        "company went under"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC002",
+      "feature_type": "occupational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF029",
+      "feature_name": "medication_side_effects",
+      "display_name": "Medication Side Effects",
+      "definition": "Adverse physical or psychological effects from prescribed medications",
+      "informal_expressions": [
+        "medication side effects",
+        "drug made me worse",
+        "bad reaction to meds",
+        "pharmaceutical problems",
+        "pill side effects",
+        "prescription issues",
+        "medicine making me sick",
+        "adverse drug reaction",
+        "chemical side effects",
+        "medication hell",
+        "pharmaceutical nightmare"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF030",
+      "feature_name": "substance_abuse",
+      "display_name": "Substance Abuse",
+      "definition": "Problematic use of drugs, alcohol, or other substances",
+      "informal_expressions": [
+        "addicted to drugs",
+        "substance abuse",
+        "alcohol problem",
+        "drug addiction",
+        "using to cope",
+        "substance dependence",
+        "can't stop using",
+        "addiction issues",
+        "chemical dependency",
+        "recovering addict",
+        "substance use disorder"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF031",
+      "feature_name": "alcohol_abuse",
+      "display_name": "Alcohol Abuse",
+      "definition": "Excessive or problematic consumption of alcohol",
+      "informal_expressions": [
+        "alcohol problem",
+        "drinking too much",
+        "alcoholic",
+        "can't control drinking",
+        "alcohol dependence",
+        "drinking to cope",
+        "alcoholism",
+        "problem drinking",
+        "blackout drinking",
+        "drinking alone",
+        "alcohol abuse"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF032",
+      "feature_name": "chronic_illness",
+      "display_name": "Chronic Illness",
+      "definition": "Long-term medical conditions causing ongoing physical and psychological distress",
+      "informal_expressions": [
+        "chronic illness",
+        "autoimmune disease",
+        "chronic pain",
+        "long-term illness",
+        "health problems",
+        "medical condition",
+        "sick all the time",
+        "chronic health issues",
+        "incurable disease",
+        "lifelong illness",
+        "health struggles"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF033",
+      "feature_name": "cancer_diagnosis",
+      "display_name": "Cancer Diagnosis",
+      "definition": "Receiving a cancer diagnosis and associated treatment trauma",
+      "informal_expressions": [
+        "cancer diagnosis",
+        "cancer patient",
+        "cancer treatment",
+        "chemotherapy",
+        "terminal diagnosis",
+        "cancer survivor",
+        "cancer battle",
+        "cancer scare",
+        "cancer trauma",
+        "cancer journey",
+        "cancer depression"
+      ],
+      "valence": "negative",
+      "severity": "very_high",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF034",
+      "feature_name": "chronic_pain",
+      "display_name": "Chronic Pain",
+      "definition": "Persistent physical pain affecting daily functioning and mental health",
+      "informal_expressions": [
+        "chronic pain",
+        "pain every day",
+        "constant pain",
+        "pain condition",
+        "pain management",
+        "pain suffering",
+        "physical agony",
+        "pain disorder",
+        "painful condition",
+        "unbearable pain",
+        "pain depression"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF035",
+      "feature_name": "disability_experience",
+      "display_name": "Disability Experience",
+      "definition": "Physical or cognitive disability affecting daily life and mental well-being",
+      "informal_expressions": [
+        "disabled",
+        "physical disability",
+        "mobility issues",
+        "cognitive disability",
+        "disabled depression",
+        "disability struggles",
+        "handicapped",
+        "accessibility issues",
+        "disability discrimination",
+        "disabled life",
+        "chronic disability"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF036",
+      "feature_name": "withdrawal_symptoms",
+      "display_name": "Withdrawal Symptoms",
+      "definition": "Physical and psychological symptoms when reducing or stopping substance use",
+      "informal_expressions": [
+        "withdrawal symptoms",
+        "detoxing",
+        "coming off meds",
+        "withdrawal hell",
+        "addiction withdrawal",
+        "detox symptoms",
+        "medication withdrawal",
+        "substance withdrawal",
+        "cold turkey",
+        "withdrawal depression",
+        "withdrawal anxiety"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF037",
+      "feature_name": "medical_trauma",
+      "display_name": "Medical Trauma",
+      "definition": "Psychological trauma resulting from medical procedures, treatments, or hospitalization",
+      "informal_expressions": [
+        "medical trauma",
+        "hospital trauma",
+        "surgical trauma",
+        "medical PTSD",
+        "traumatic medical experience",
+        "hospitalization trauma",
+        "procedure trauma",
+        "medical procedure anxiety",
+        "hospital phobia",
+        "medical mistreatment trauma"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": false
+    },
+    {
+      "feature_id": "AF038",
+      "feature_name": "treatment_failure",
+      "display_name": "Treatment Failure",
+      "definition": "Mental health treatments that haven't worked or made things worse",
+      "informal_expressions": [
+        "treatment resistant",
+        "therapy didn't work",
+        "meds don't help",
+        "failed treatment",
+        "nothing works",
+        "treatment failure",
+        "therapy failure",
+        "medication failure",
+        "psychiatric treatment failure",
+        "no improvement",
+        "treatment hopelessness"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF039",
+      "feature_name": "hospitalization_experience",
+      "display_name": "Hospitalization Experience",
+      "definition": "Traumatic experiences related to psychiatric or medical hospitalization",
+      "informal_expressions": [
+        "psychiatric hospitalization",
+        "institutionalized",
+        "mental hospital",
+        "inpatient treatment",
+        "locked ward",
+        "forced hospitalization",
+        "hospital trauma",
+        "psych ward",
+        "mental institution",
+        "hospital stay trauma",
+        "inpatient experience"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": true
+    },
+    {
+      "feature_id": "AF040",
+      "feature_name": "genetic_predisposition",
+      "display_name": "Genetic Predisposition",
+      "definition": "Family history or genetic factors contributing to mental health conditions",
+      "informal_expressions": [
+        "family history of mental illness",
+        "genetic predisposition",
+        "runs in the family",
+        "inherited depression",
+        "family mental health",
+        "genetic vulnerability",
+        "biological predisposition",
+        "family mental illness history",
+        "genetic risk factors"
+      ],
+      "valence": "neutral",
+      "severity": "low",
+      "primary_semantic": "AC003",
+      "feature_type": "medical",
+      "observable": false
+    },
+    {
+      "feature_id": "AF041",
+      "feature_name": "romantic_breakup",
+      "display_name": "Romantic Breakup",
+      "definition": "Ending of a romantic relationship causing emotional distress",
+      "informal_expressions": [
+        "breakup",
+        "heartbroken",
+        "dumped",
+        "relationship ended",
+        "broken heart",
+        "split up",
+        "divorce",
+        "separated",
+        "left me",
+        "relationship breakup",
+        "love lost",
+        "romantic rejection"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF042",
+      "feature_name": "divorce_experience",
+      "display_name": "Divorce Experience",
+      "definition": "Legal dissolution of marriage and associated emotional trauma",
+      "informal_expressions": [
+        "divorce",
+        "getting divorced",
+        "marriage ended",
+        "failed marriage",
+        "divorce trauma",
+        "marriage breakup",
+        "separated",
+        "marital breakdown",
+        "divorce stress",
+        "marriage dissolution",
+        "divorce depression"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF043",
+      "feature_name": "betrayal_experience",
+      "display_name": "Betrayal Experience",
+      "definition": "Violation of trust by someone close, such as infidelity or disloyalty",
+      "informal_expressions": [
+        "betrayed",
+        "cheated on",
+        "infidelity",
+        "affair",
+        "disloyal",
+        "broken trust",
+        "backstabbed",
+        "lied to",
+        "deceived",
+        "trust violated",
+        "emotional affair",
+        "physical affair",
+        "betrayal trauma"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF044",
+      "feature_name": "jealousy_problems",
+      "display_name": "Jealousy Problems",
+      "definition": "Intense feelings of envy, possessiveness, or insecurity in relationships",
+      "informal_expressions": [
+        "jealous",
+        "possessive",
+        "insecure in relationship",
+        "fear of abandonment",
+        "relationship jealousy",
+        "trust issues",
+        "paranoid about partner",
+        "jealous thoughts",
+        "insecure attachment",
+        "fear of cheating",
+        "relationship insecurity"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF045",
+      "feature_name": "family_conflict",
+      "display_name": "Family Conflict",
+      "definition": "Tension, arguments, or dysfunction within family relationships",
+      "informal_expressions": [
+        "family conflict",
+        "fighting with family",
+        "toxic family",
+        "dysfunctional family",
+        "family drama",
+        "family arguments",
+        "family stress",
+        "family tension",
+        "family issues",
+        "parental conflict",
+        "sibling rivalry"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF046",
+      "feature_name": "bad_parenting",
+      "display_name": "Bad Parenting",
+      "definition": "Negative childhood experiences with neglectful, abusive, or incompetent parents",
+      "informal_expressions": [
+        "bad parents",
+        "neglected as child",
+        "abusive parents",
+        "narcissistic parents",
+        "toxic parenting",
+        "parental abuse",
+        "childhood neglect",
+        "emotionally absent parents",
+        "parental failure",
+        "bad upbringing",
+        "traumatic childhood"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF047",
+      "feature_name": "childhood_trauma",
+      "display_name": "Childhood Trauma",
+      "definition": "Adverse childhood experiences causing long-term psychological impact",
+      "informal_expressions": [
+        "childhood trauma",
+        "abused as child",
+        "neglected childhood",
+        "traumatic childhood",
+        "adverse childhood",
+        "childhood abuse",
+        "developmental trauma",
+        "childhood emotional neglect",
+        "childhood adversity",
+        "traumatic upbringing"
+      ],
+      "valence": "negative",
+      "severity": "very_high",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF048",
+      "feature_name": "abandonment_fears",
+      "display_name": "Abandonment Fears",
+      "definition": "Intense fear of being left alone or rejected by loved ones",
+      "informal_expressions": [
+        "fear of abandonment",
+        "afraid of being alone",
+        "abandonment issues",
+        "left alone",
+        "deserted",
+        "rejected",
+        "fear of being left",
+        "abandonment trauma",
+        "separation anxiety",
+        "attachment anxiety",
+        "fear of losing loved ones"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF049",
+      "feature_name": "relationship_conflict",
+      "display_name": "Relationship Conflict",
+      "definition": "Ongoing arguments, disagreements, and tension in intimate relationships",
+      "informal_expressions": [
+        "constant fighting",
+        "relationship conflict",
+        "arguing all the time",
+        "marital problems",
+        "partner conflicts",
+        "relationship tension",
+        "communication breakdown",
+        "fighting with partner",
+        "relationship stress",
+        "domestic conflict"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF050",
+      "feature_name": "trust_issues",
+      "display_name": "Trust Issues",
+      "definition": "Difficulty trusting others due to past relational trauma",
+      "informal_expressions": [
+        "trust issues",
+        "can't trust anyone",
+        "trust broken",
+        "distrustful",
+        "suspicious of others",
+        "trust problems",
+        "difficulty trusting",
+        "trust trauma",
+        "betrayal caused trust issues",
+        "trust anxiety"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF051",
+      "feature_name": "codependency_patterns",
+      "display_name": "Codependency Patterns",
+      "definition": "Unhealthy relationship patterns characterized by excessive emotional reliance",
+      "informal_expressions": [
+        "codependent",
+        "unhealthy attachment",
+        "emotional dependence",
+        "needy in relationships",
+        "can't be alone",
+        "relationship addiction",
+        "unhealthy relationship patterns",
+        "dependent personality",
+        "emotional reliance",
+        "relationship dependency"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF052",
+      "feature_name": "parental_pressure",
+      "display_name": "Parental Pressure",
+      "definition": "Excessive expectations and demands from parents causing distress",
+      "informal_expressions": [
+        "parental pressure",
+        "parents' expectations",
+        "pressure from family",
+        "family expectations",
+        "parental demands",
+        "family pressure",
+        "parents disappointed",
+        "parental disappointment",
+        "family disapproval",
+        "parental criticism"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF053",
+      "feature_name": "friendship_loss",
+      "display_name": "Friendship Loss",
+      "definition": "Loss of friendships through conflict, distance, or changing circumstances",
+      "informal_expressions": [
+        "lost friends",
+        "friendship ended",
+        "friend betrayed me",
+        "friendship breakup",
+        "lost my best friend",
+        "friend ghosted me",
+        "friendship conflict",
+        "friend drama",
+        "social circle collapse",
+        "lonely without friends"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF054",
+      "feature_name": "domestic_violence",
+      "display_name": "Domestic Violence",
+      "definition": "Violence, abuse, or intimidation within domestic relationships",
+      "informal_expressions": [
+        "domestic violence",
+        "abusive relationship",
+        "partner abuse",
+        "domestic abuse",
+        "violent relationship",
+        "spousal abuse",
+        "intimate partner violence",
+        "abused by partner",
+        "relationship violence",
+        "home violence"
+      ],
+      "valence": "negative",
+      "severity": "very_high",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": true
+    },
+    {
+      "feature_id": "AF055",
+      "feature_name": "attachment_insecurity",
+      "display_name": "Attachment Insecurity",
+      "definition": "Unstable or anxious attachment patterns from early relational experiences",
+      "informal_expressions": [
+        "insecure attachment",
+        "attachment issues",
+        "fearful attachment",
+        "anxious attachment",
+        "avoidant attachment",
+        "attachment trauma",
+        "attachment problems",
+        "attachment anxiety",
+        "relationship attachment issues",
+        "attachment style problems"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF056",
+      "feature_name": "intergenerational_trauma",
+      "display_name": "Intergenerational Trauma",
+      "definition": "Trauma patterns passed down through family generations",
+      "informal_expressions": [
+        "family trauma history",
+        "generational trauma",
+        "ancestral trauma",
+        "family patterns",
+        "inherited trauma",
+        "family legacy of trauma",
+        "generational abuse",
+        "family trauma cycle",
+        "trauma passed down",
+        "historical family trauma"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC004",
+      "feature_type": "relational",
+      "observable": false
+    },
+    {
+      "feature_id": "AF057",
+      "feature_name": "loneliness_experience",
+      "display_name": "Loneliness Experience",
+      "definition": "Painful feeling of social isolation and lack of meaningful connections",
+      "informal_expressions": [
+        "lonely",
+        "alone",
+        "no friends",
+        "social isolation",
+        "feeling isolated",
+        "no one to talk to",
+        "socially isolated",
+        "chronic loneliness",
+        "profound loneliness",
+        "isolated from others",
+        "loneliness depression"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF058",
+      "feature_name": "social_isolation",
+      "display_name": "Social Isolation",
+      "definition": "Objective lack of social connections and community involvement",
+      "informal_expressions": [
+        "socially isolated",
+        "no social life",
+        "cut off from people",
+        "hermit lifestyle",
+        "isolated existence",
+        "social withdrawal",
+        "reclusive",
+        "socially disconnected",
+        "avoiding people",
+        "social isolation",
+        "alone all the time"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": true
+    },
+    {
+      "feature_id": "AF059",
+      "feature_name": "meaninglessness_feeling",
+      "display_name": "Meaninglessness Feeling",
+      "definition": "Lack of purpose, significance, or meaningful direction in life",
+      "informal_expressions": [
+        "life has no meaning",
+        "no purpose",
+        "existential void",
+        "pointless existence",
+        "why am I here",
+        "life is meaningless",
+        "no reason to live",
+        "existential crisis",
+        "purposeless",
+        "directionless",
+        "existential depression"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF060",
+      "feature_name": "existential_crisis",
+      "display_name": "Existential Crisis",
+      "definition": "Profound questioning of life's meaning, purpose, and one's place in existence",
+      "informal_expressions": [
+        "existential crisis",
+        "questioning everything",
+        "life purpose crisis",
+        "identity crisis",
+        "what is the point",
+        "existential dread",
+        "cosmic insignificance",
+        "philosophical depression",
+        "meaning crisis",
+        "purpose crisis",
+        "existential anxiety"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF061",
+      "feature_name": "powerlessness_feeling",
+      "display_name": "Powerlessness Feeling",
+      "definition": "Feeling of lacking control over one's life, circumstances, or outcomes",
+      "informal_expressions": [
+        "powerless",
+        "no control",
+        "helpless",
+        "victim of circumstances",
+        "can't change anything",
+        "trapped",
+        "no agency",
+        "life controls me",
+        "out of control",
+        "powerless depression",
+        "learned helplessness"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF062",
+      "feature_name": "normlessness_experience",
+      "display_name": "Normlessness Experience",
+      "definition": "Feeling disconnected from societal norms, values, and expectations",
+      "informal_expressions": [
+        "don't fit in",
+        "alienated from society",
+        "societal misfit",
+        "no place for me",
+        "cultural alienation",
+        "society rejects me",
+        "don't belong anywhere",
+        "social misfit",
+        "out of sync with world",
+        "cultural dislocation",
+        "anomie"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF063",
+      "feature_name": "emptiness_feeling",
+      "display_name": "Emptiness Feeling",
+      "definition": "Persistent inner void, hollowness, or emotional numbness",
+      "informal_expressions": [
+        "empty inside",
+        "emotional emptiness",
+        "hollow feeling",
+        "void inside",
+        "nothing inside",
+        "emotional numbness",
+        "dead inside",
+        "empty shell",
+        "inner emptiness",
+        "existential emptiness",
+        "hollow existence"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF064",
+      "feature_name": "identity_confusion",
+      "display_name": "Identity Confusion",
+      "definition": "Uncertainty about one's self-concept, values, and personal identity",
+      "informal_expressions": [
+        "identity crisis",
+        "don't know who I am",
+        "lost sense of self",
+        "identity confusion",
+        "who am I",
+        "self-concept problems",
+        "identity issues",
+        "unclear identity",
+        "fragmented self",
+        "identity fragmentation",
+        "self-identity crisis"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF065",
+      "feature_name": "disconnection_feeling",
+      "display_name": "Disconnection Feeling",
+      "definition": "Feeling separated from others, the world, or even oneself",
+      "informal_expressions": [
+        "disconnected",
+        "disassociated",
+        "not present",
+        "out of touch",
+        "separate from world",
+        "disconnected from reality",
+        "detached",
+        "out of body experience",
+        "disconnected from self",
+        "emotional disconnection",
+        "social disconnection"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF066",
+      "feature_name": "hopelessness_feeling",
+      "display_name": "Hopelessness Feeling",
+      "definition": "Belief that things will not improve and positive change is impossible",
+      "informal_expressions": [
+        "hopeless",
+        "no future",
+        "nothing will change",
+        "no hope",
+        "future is bleak",
+        "despair",
+        "hopeless depression",
+        "no light at end",
+        "permanent misery",
+        "irreversible situation",
+        "fatalistic thinking"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF067",
+      "feature_name": "existential_loneliness",
+      "display_name": "Existential Loneliness",
+      "definition": "Profound loneliness stemming from awareness of human separateness and mortality",
+      "informal_expressions": [
+        "existential loneliness",
+        "ultimate aloneness",
+        "cosmic loneliness",
+        "fundamentally alone",
+        "human condition loneliness",
+        "mortality loneliness",
+        "existential isolation",
+        "profound aloneness",
+        "ontological loneliness",
+        "essential solitude"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF068",
+      "feature_name": "learned_helplessness",
+      "display_name": "Learned Helplessness",
+      "definition": "Psychological state where one believes they have no control over outcomes",
+      "informal_expressions": [
+        "learned helplessness",
+        "can't change anything",
+        "trapped in situation",
+        "no control over life",
+        "powerless to change",
+        "conditioned helplessness",
+        "psychological helplessness",
+        "resigned to fate",
+        "fatalistic outlook",
+        "helpless depression"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF069",
+      "feature_name": "spiritual_crisis",
+      "display_name": "Spiritual Crisis",
+      "definition": "Loss of faith, spiritual beliefs, or connection to transcendent meaning",
+      "informal_expressions": [
+        "spiritual crisis",
+        "lost my faith",
+        "religious depression",
+        "crisis of faith",
+        "spiritual emptiness",
+        "lost connection to God",
+        "religious trauma",
+        "spiritual disconnection",
+        "loss of belief",
+        "religious disillusionment",
+        "spiritual void"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF070",
+      "feature_name": "cosmic_insignificance",
+      "display_name": "Cosmic Insignificance",
+      "definition": "Feeling of meaninglessness in the face of vast universe and human mortality",
+      "informal_expressions": [
+        "cosmic insignificance",
+        "meaningless in universe",
+        "small in cosmos",
+        "life is brief",
+        "mortality awareness",
+        "existential terror",
+        "cosmic perspective depression",
+        "universe is indifferent",
+        "pointless in cosmos",
+        "temporary existence"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC005",
+      "feature_type": "existential",
+      "observable": false
+    },
+    {
+      "feature_id": "AF071",
+      "feature_name": "vague_attribution",
+      "display_name": "Vague Attribution",
+      "definition": "Non-specific, unclear, or poorly articulated causes of distress",
+      "informal_expressions": [
+        "not sure why",
+        "can't pinpoint cause",
+        "vague reasons",
+        "unclear why I feel this",
+        "don't know the reason",
+        "hard to explain",
+        "something's wrong",
+        "indefinable cause",
+        "unclear origins",
+        "fuzzy reasons",
+        "ambiguous causation"
+      ],
+      "valence": "neutral",
+      "severity": "low",
+      "primary_semantic": "AC006",
+      "feature_type": "cognitive",
+      "observable": false
+    },
+    {
+      "feature_id": "AF072",
+      "feature_name": "multiple_stressors",
+      "display_name": "Multiple Stressors",
+      "definition": "Multiple simultaneous or sequential stressful events causing overwhelm",
+      "informal_expressions": [
+        "everything at once",
+        "multiple problems",
+        "too many stresses",
+        "overwhelmed by everything",
+        "life falling apart",
+        "everything going wrong",
+        "multiple crises",
+        "perfect storm",
+        "converging problems",
+        "everything collapsing"
+      ],
+      "valence": "negative",
+      "severity": "high",
+      "primary_semantic": "AC006",
+      "feature_type": "cognitive",
+      "observable": true
+    },
+    {
+      "feature_id": "AF073",
+      "feature_name": "attribution_confusion",
+      "display_name": "Attribution Confusion",
+      "definition": "Confusion about what caused mental health problems or emotional distress",
+      "informal_expressions": [
+        "confused about cause",
+        "don't know why I'm depressed",
+        "mixed up about reasons",
+        "attribution confusion",
+        "uncertain causation",
+        "conflicting explanations",
+        "puzzled about source",
+        "muddled thinking about cause",
+        "cause confusion",
+        "uncertainty about origins"
+      ],
+      "valence": "neutral",
+      "severity": "low",
+      "primary_semantic": "AC006",
+      "feature_type": "cognitive",
+      "observable": false
+    },
+    {
+      "feature_id": "AF074",
+      "feature_name": "complex_etiology",
+      "display_name": "Complex Etiology",
+      "definition": "Multiple interacting factors contributing to mental health condition",
+      "informal_expressions": [
+        "complex causes",
+        "many factors",
+        "interacting reasons",
+        "multifactorial",
+        "complex web of causes",
+        "complicated origins",
+        "layered problems",
+        "complex etiology",
+        "multiple contributing factors",
+        "complicated causation"
+      ],
+      "valence": "neutral",
+      "severity": "low",
+      "primary_semantic": "AC006",
+      "feature_type": "cognitive",
+      "observable": false
+    },
+    {
+      "feature_id": "AF075",
+      "feature_name": "unclear_onset",
+      "display_name": "Unclear Onset",
+      "definition": "Difficulty identifying when or how mental health problems began",
+      "informal_expressions": [
+        "don't know when it started",
+        "gradual onset",
+        "unclear beginning",
+        "slow decline",
+        "can't pinpoint start",
+        "crept up on me",
+        "insidious onset",
+        "unclear timeline",
+        "ambiguous start",
+        "fuzzy origins"
+      ],
+      "valence": "neutral",
+      "severity": "low",
+      "primary_semantic": "AC006",
+      "feature_type": "cognitive",
+      "observable": false
+    },
+    {
+      "feature_id": "AF076",
+      "feature_name": "general_life_stress",
+      "display_name": "General Life Stress",
+      "definition": "Non-specific life pressures and daily hassles contributing to distress",
+      "informal_expressions": [
+        "life stress",
+        "daily stress",
+        "general stress",
+        "overwhelmed by life",
+        "adulting stress",
+        "life pressures",
+        "normal life stress",
+        "routine stress",
+        "daily grind",
+        "mundane stress",
+        "ordinary life pressures"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC006",
+      "feature_type": "cognitive",
+      "observable": true
+    },
+    {
+      "feature_id": "AF077",
+      "feature_name": "overwhelm_experience",
+      "display_name": "Overwhelm Experience",
+      "definition": "Feeling completely overcome by emotions, responsibilities, or life demands",
+      "informal_expressions": [
+        "overwhelmed",
+        "can't cope",
+        "too much to handle",
+        "drowning",
+        "overloaded",
+        "at capacity",
+        "breaking point",
+        "overwhelmed by everything",
+        "can't deal",
+        "overwhelm depression",
+        "emotional overload"
+      ],
+      "valence": "negative",
+      "severity": "moderate",
+      "primary_semantic": "AC006",
+      "feature_type": "cognitive",
+      "observable": false
+    },
+    {
+      "feature_id": "AF078",
+      "feature_name": "situational_ambiguity",
+      "display_name": "Situational Ambiguity",
+      "definition": "Unclear or ambiguous life situations making attribution difficult",
+      "informal_expressions": [
+        "unclear situation",
+        "ambiguous circumstances",
+        "mixed signals",
+        "confusing situation",
+        "uncertain environment",
+        "ambiguous life events",
+        "confusing circumstances",
+        "unclear context",
+        "situational confusion",
+        "ambiguous triggers"
+      ],
+      "valence": "neutral",
+      "severity": "low",
+      "primary_semantic": "AC006",
+      "feature_type": "cognitive",
+      "observable": true
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "EFC001",
+      "source": "AF001",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC002",
+      "source": "AF002",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC003",
+      "source": "AF003",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC004",
+      "source": "AF004",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC005",
+      "source": "AF005",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC006",
+      "source": "AF006",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC007",
+      "source": "AF007",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC008",
+      "source": "AF008",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC009",
+      "source": "AF009",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC010",
+      "source": "AF010",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC011",
+      "source": "AF011",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC012",
+      "source": "AF012",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC013",
+      "source": "AF013",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC014",
+      "source": "AF014",
+      "target": "AC001",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC015",
+      "source": "AF015",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC016",
+      "source": "AF016",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC017",
+      "source": "AF017",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC018",
+      "source": "AF018",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC019",
+      "source": "AF019",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC020",
+      "source": "AF020",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC021",
+      "source": "AF021",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC022",
+      "source": "AF022",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC023",
+      "source": "AF023",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC024",
+      "source": "AF024",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC025",
+      "source": "AF025",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC026",
+      "source": "AF026",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC027",
+      "source": "AF027",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC028",
+      "source": "AF028",
+      "target": "AC002",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC029",
+      "source": "AF029",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC030",
+      "source": "AF030",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC031",
+      "source": "AF031",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC032",
+      "source": "AF032",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC033",
+      "source": "AF033",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC034",
+      "source": "AF034",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC035",
+      "source": "AF035",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC036",
+      "source": "AF036",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC037",
+      "source": "AF037",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC038",
+      "source": "AF038",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC039",
+      "source": "AF039",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC040",
+      "source": "AF040",
+      "target": "AC003",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC041",
+      "source": "AF041",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC042",
+      "source": "AF042",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC043",
+      "source": "AF043",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC044",
+      "source": "AF044",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC045",
+      "source": "AF045",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC046",
+      "source": "AF046",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC047",
+      "source": "AF047",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC048",
+      "source": "AF048",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC049",
+      "source": "AF049",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC050",
+      "source": "AF050",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC051",
+      "source": "AF051",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC052",
+      "source": "AF052",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC053",
+      "source": "AF053",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC054",
+      "source": "AF054",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC055",
+      "source": "AF055",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC056",
+      "source": "AF056",
+      "target": "AC004",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC057",
+      "source": "AF057",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC058",
+      "source": "AF058",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC059",
+      "source": "AF059",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC060",
+      "source": "AF060",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC061",
+      "source": "AF061",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC062",
+      "source": "AF062",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC063",
+      "source": "AF063",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC064",
+      "source": "AF064",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC065",
+      "source": "AF065",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC066",
+      "source": "AF066",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC067",
+      "source": "AF067",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC068",
+      "source": "AF068",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC069",
+      "source": "AF069",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC070",
+      "source": "AF070",
+      "target": "AC005",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC071",
+      "source": "AF071",
+      "target": "AC006",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC072",
+      "source": "AF072",
+      "target": "AC006",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC073",
+      "source": "AF073",
+      "target": "AC006",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC074",
+      "source": "AF074",
+      "target": "AC006",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC075",
+      "source": "AF075",
+      "target": "AC006",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC076",
+      "source": "AF076",
+      "target": "AC006",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC077",
+      "source": "AF077",
+      "target": "AC006",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "EFC078",
+      "source": "AF078",
+      "target": "AC006",
+      "edge_type": "feature_to_semantic",
+      "relation": "belongs_to"
+    },
+    {
+      "edge_id": "ECL001",
+      "source": "AC001",
+      "target": "CL002",
+      "edge_type": "semantic_to_label",
+      "relation": "primary_indicator"
+    },
+    {
+      "edge_id": "ECL002",
+      "source": "AC001",
+      "target": "CL006",
+      "edge_type": "semantic_to_label",
+      "relation": "secondary_indicator"
+    },
+    {
+      "edge_id": "ECL003",
+      "source": "AC002",
+      "target": "CL003",
+      "edge_type": "semantic_to_label",
+      "relation": "primary_indicator"
+    },
+    {
+      "edge_id": "ECL004",
+      "source": "AC002",
+      "target": "CL006",
+      "edge_type": "semantic_to_label",
+      "relation": "secondary_indicator"
+    },
+    {
+      "edge_id": "ECL005",
+      "source": "AC002",
+      "target": "CL001",
+      "edge_type": "semantic_to_label",
+      "relation": "secondary_indicator"
+    },
+    {
+      "edge_id": "ECL006",
+      "source": "AC003",
+      "target": "CL004",
+      "edge_type": "semantic_to_label",
+      "relation": "primary_indicator"
+    },
+    {
+      "edge_id": "ECL007",
+      "source": "AC003",
+      "target": "CL001",
+      "edge_type": "semantic_to_label",
+      "relation": "secondary_indicator"
+    },
+    {
+      "edge_id": "ECL008",
+      "source": "AC004",
+      "target": "CL005",
+      "edge_type": "semantic_to_label",
+      "relation": "primary_indicator"
+    },
+    {
+      "edge_id": "ECL009",
+      "source": "AC004",
+      "target": "CL006",
+      "edge_type": "semantic_to_label",
+      "relation": "secondary_indicator"
+    },
+    {
+      "edge_id": "ECL010",
+      "source": "AC004",
+      "target": "CL001",
+      "edge_type": "semantic_to_label",
+      "relation": "secondary_indicator"
+    },
+    {
+      "edge_id": "ECL011",
+      "source": "AC005",
+      "target": "CL006",
+      "edge_type": "semantic_to_label",
+      "relation": "primary_indicator"
+    },
+    {
+      "edge_id": "ECL012",
+      "source": "AC005",
+      "target": "CL001",
+      "edge_type": "semantic_to_label",
+      "relation": "secondary_indicator"
+    },
+    {
+      "edge_id": "ECL013",
+      "source": "AC006",
+      "target": "CL001",
+      "edge_type": "semantic_to_label",
+      "relation": "primary_indicator"
+    },
+    {
+      "edge_id": "E_F2F_001",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF001",
+      "source_name": "discrimination_experience",
+      "target_id": "AF008",
+      "target_name": "stigma_experience",
+      "direction": "undirected",
+      "rationale": "Discrimination and stigma frequently co-occur in mental health attributions"
+    },
+    {
+      "edge_id": "E_F2F_002",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF015",
+      "source_name": "unemployment",
+      "target_id": "AF016",
+      "target_name": "financial_crisis",
+      "direction": "undirected",
+      "rationale": "Unemployment and financial crisis often happen together in attribution narratives"
+    },
+    {
+      "edge_id": "E_F2F_003",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF057",
+      "source_name": "loneliness_experience",
+      "target_id": "AF058",
+      "target_name": "social_isolation",
+      "direction": "undirected",
+      "rationale": "Loneliness and social isolation commonly co-occur in mental health contexts"
+    },
+    {
+      "edge_id": "E_F2F_004",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF032",
+      "source_name": "chronic_illness",
+      "target_id": "AF034",
+      "target_name": "chronic_pain",
+      "direction": "undirected",
+      "rationale": "Chronic illness and chronic pain are frequently reported together"
+    },
+    {
+      "edge_id": "E_F2F_005",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF041",
+      "source_name": "romantic_breakup",
+      "target_id": "AF043",
+      "target_name": "betrayal_experience",
+      "direction": "undirected",
+      "rationale": "Romantic breakups and betrayal often co-occur in relationship attributions"
+    },
+    {
+      "edge_id": "E_F2F_006",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF002",
+      "source_name": "body_shaming",
+      "target_id": "AF009",
+      "target_name": "microaggressions",
+      "direction": "undirected",
+      "rationale": "Body shaming and microaggressions frequently co-occur in bias-related attributions"
+    },
+    {
+      "edge_id": "E_F2F_007",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF003",
+      "source_name": "physical_abuse",
+      "target_id": "AF004",
+      "target_name": "emotional_abuse",
+      "direction": "undirected",
+      "rationale": "Physical abuse and emotional abuse often co-occur in abuse narratives"
+    },
+    {
+      "edge_id": "E_F2F_008",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF005",
+      "source_name": "sexual_abuse",
+      "target_id": "AF047",
+      "target_name": "childhood_trauma",
+      "direction": "undirected",
+      "rationale": "Sexual abuse and childhood trauma are commonly linked in attribution stories"
+    },
+    {
+      "edge_id": "E_F2F_009",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF017",
+      "source_name": "workplace_bullying",
+      "target_id": "AF026",
+      "target_name": "hostile_work_environment",
+      "direction": "undirected",
+      "rationale": "Workplace bullying and hostile work environment frequently co-occur"
+    },
+    {
+      "edge_id": "E_F2F_010",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF020",
+      "source_name": "academic_pressure",
+      "target_id": "AF019",
+      "target_name": "academic_failure",
+      "direction": "undirected",
+      "rationale": "Academic pressure and academic failure often appear together in career attributions"
+    },
+    {
+      "edge_id": "E_F2F_011",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF021",
+      "source_name": "burnout_experience",
+      "target_id": "AF022",
+      "target_name": "work_life_imbalance",
+      "direction": "undirected",
+      "rationale": "Burnout and work-life imbalance commonly co-occur in job-related stress"
+    },
+    {
+      "edge_id": "E_F2F_012",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF030",
+      "source_name": "substance_abuse",
+      "target_id": "AF031",
+      "target_name": "alcohol_abuse",
+      "direction": "undirected",
+      "rationale": "Substance abuse and alcohol abuse frequently co-occur in medication attributions"
+    },
+    {
+      "edge_id": "E_F2F_013",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF033",
+      "source_name": "cancer_diagnosis",
+      "target_id": "AF039",
+      "target_name": "hospitalization_experience",
+      "direction": "undirected",
+      "rationale": "Cancer diagnosis and hospitalization often co-occur in medical attributions"
+    },
+    {
+      "edge_id": "E_F2F_014",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF042",
+      "source_name": "divorce_experience",
+      "target_id": "AF045",
+      "target_name": "family_conflict",
+      "direction": "undirected",
+      "rationale": "Divorce and family conflict frequently co-occur in relationship attributions"
+    },
+    {
+      "edge_id": "E_F2F_015",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF046",
+      "source_name": "bad_parenting",
+      "target_id": "AF052",
+      "target_name": "parental_pressure",
+      "direction": "undirected",
+      "rationale": "Bad parenting and parental pressure often appear together in family narratives"
+    },
+    {
+      "edge_id": "E_F2F_016",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF050",
+      "source_name": "trust_issues",
+      "target_id": "AF043",
+      "target_name": "betrayal_experience",
+      "direction": "undirected",
+      "rationale": "Trust issues and betrayal experience commonly co-occur in relationship attributions"
+    },
+    {
+      "edge_id": "E_F2F_017",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF059",
+      "source_name": "meaninglessness_feeling",
+      "target_id": "AF060",
+      "target_name": "existential_crisis",
+      "direction": "undirected",
+      "rationale": "Meaninglessness and existential crisis frequently co-occur in alienation attributions"
+    },
+    {
+      "edge_id": "E_F2F_018",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF061",
+      "source_name": "powerlessness_feeling",
+      "target_id": "AF068",
+      "target_name": "learned_helplessness",
+      "direction": "undirected",
+      "rationale": "Powerlessness and learned helplessness often appear together in mental health contexts"
+    },
+    {
+      "edge_id": "E_F2F_019",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF063",
+      "source_name": "emptiness_feeling",
+      "target_id": "AF065",
+      "target_name": "disconnection_feeling",
+      "direction": "undirected",
+      "rationale": "Emptiness and disconnection feelings commonly co-occur in alienation narratives"
+    },
+    {
+      "edge_id": "E_F2F_020",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF066",
+      "source_name": "hopelessness_feeling",
+      "target_id": "AF068",
+      "target_name": "learned_helplessness",
+      "direction": "undirected",
+      "rationale": "Hopelessness and learned helplessness frequently co-occur in depression attributions"
+    },
+    {
+      "edge_id": "E_F2F_021",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF071",
+      "source_name": "vague_attribution",
+      "target_id": "AF073",
+      "target_name": "attribution_confusion",
+      "direction": "undirected",
+      "rationale": "Vague attribution and attribution confusion often appear together in no-reason narratives"
+    },
+    {
+      "edge_id": "E_F2F_022",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF072",
+      "source_name": "multiple_stressors",
+      "target_id": "AF077",
+      "target_name": "overwhelm_experience",
+      "direction": "undirected",
+      "rationale": "Multiple stressors and overwhelm frequently co-occur in complex attribution cases"
+    },
+    {
+      "edge_id": "E_F2F_023",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF074",
+      "source_name": "complex_etiology",
+      "target_id": "AF078",
+      "target_name": "situational_ambiguity",
+      "direction": "undirected",
+      "rationale": "Complex etiology and situational ambiguity often co-occur in vague attributions"
+    },
+    {
+      "edge_id": "E_F2F_024",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF076",
+      "source_name": "general_life_stress",
+      "target_id": "AF077",
+      "target_name": "overwhelm_experience",
+      "direction": "undirected",
+      "rationale": "General life stress and overwhelm commonly co-occur in no-reason attributions"
+    },
+    {
+      "edge_id": "E_F2F_025",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF007",
+      "source_name": "bullying_harassment",
+      "target_id": "AF014",
+      "target_name": "social_ostracism",
+      "direction": "undirected",
+      "rationale": "Bullying harassment and social ostracism frequently co-occur in abuse narratives"
+    },
+    {
+      "edge_id": "E_F2F_026",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF010",
+      "source_name": "hate_speech",
+      "target_id": "AF011",
+      "target_name": "workplace_discrimination",
+      "direction": "undirected",
+      "rationale": "Hate speech and workplace discrimination often appear together in bias attributions"
+    },
+    {
+      "edge_id": "E_F2F_027",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF012",
+      "source_name": "invalidation_experience",
+      "target_id": "AF013",
+      "target_name": "victim_blaming",
+      "direction": "undirected",
+      "rationale": "Invalidation experience and victim blaming commonly co-occur in abuse contexts"
+    },
+    {
+      "edge_id": "E_F2F_028",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF023",
+      "source_name": "career_stagnation",
+      "target_id": "AF024",
+      "target_name": "job_insecurity",
+      "direction": "undirected",
+      "rationale": "Career stagnation and job insecurity frequently co-occur in job-related attributions"
+    },
+    {
+      "edge_id": "E_F2F_029",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF025",
+      "source_name": "financial_stress",
+      "target_id": "AF016",
+      "target_name": "financial_crisis",
+      "direction": "undirected",
+      "rationale": "Financial stress and financial crisis often appear together in economic attributions"
+    },
+    {
+      "edge_id": "E_F2F_030",
+      "edge_type": "feature_to_feature",
+      "subtype": "co-occurs-in",
+      "source_id": "AF035",
+      "source_name": "disability_experience",
+      "target_id": "AF034",
+      "target_name": "chronic_pain",
+      "direction": "undirected",
+      "rationale": "Disability experience and chronic pain commonly co-occur in medical attributions"
+    },
+    {
+      "edge_id": "E_F2F_031",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF017",
+      "source_name": "workplace_bullying",
+      "target_id": "AF018",
+      "target_name": "job_dissatisfaction",
+      "direction": "directed",
+      "rationale": "Workplace bullying typically precedes job dissatisfaction in attribution sequences"
+    },
+    {
+      "edge_id": "E_F2F_032",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF020",
+      "source_name": "academic_pressure",
+      "target_id": "AF019",
+      "target_name": "academic_failure",
+      "direction": "directed",
+      "rationale": "Academic pressure often precedes academic failure in career attributions"
+    },
+    {
+      "edge_id": "E_F2F_033",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF049",
+      "source_name": "relationship_conflict",
+      "target_id": "AF041",
+      "target_name": "romantic_breakup",
+      "direction": "directed",
+      "rationale": "Relationship conflict typically precedes romantic breakup in relationship narratives"
+    },
+    {
+      "edge_id": "E_F2F_034",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF030",
+      "source_name": "substance_abuse",
+      "target_id": "AF036",
+      "target_name": "withdrawal_symptoms",
+      "direction": "directed",
+      "rationale": "Substance abuse usually precedes withdrawal symptoms in medication attributions"
+    },
+    {
+      "edge_id": "E_F2F_035",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF006",
+      "source_name": "social_exclusion",
+      "target_id": "AF057",
+      "target_name": "loneliness_experience",
+      "direction": "directed",
+      "rationale": "Social exclusion often precedes loneliness in alienation attributions"
+    },
+    {
+      "edge_id": "E_F2F_036",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF015",
+      "source_name": "unemployment",
+      "target_id": "AF016",
+      "target_name": "financial_crisis",
+      "direction": "directed",
+      "rationale": "Unemployment frequently precedes financial crisis in job-related attributions"
+    },
+    {
+      "edge_id": "E_F2F_037",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF032",
+      "source_name": "chronic_illness",
+      "target_id": "AF034",
+      "target_name": "chronic_pain",
+      "direction": "directed",
+      "rationale": "Chronic illness often precedes chronic pain in medical attribution sequences"
+    },
+    {
+      "edge_id": "E_F2F_038",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF043",
+      "source_name": "betrayal_experience",
+      "target_id": "AF050",
+      "target_name": "trust_issues",
+      "direction": "directed",
+      "rationale": "Betrayal experience typically precedes trust issues in relationship attributions"
+    },
+    {
+      "edge_id": "E_F2F_039",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF047",
+      "source_name": "childhood_trauma",
+      "target_id": "AF055",
+      "target_name": "attachment_insecurity",
+      "direction": "directed",
+      "rationale": "Childhood trauma often precedes attachment insecurity in developmental attributions"
+    },
+    {
+      "edge_id": "E_F2F_040",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF021",
+      "source_name": "burnout_experience",
+      "target_id": "AF018",
+      "target_name": "job_dissatisfaction",
+      "direction": "directed",
+      "rationale": "Burnout frequently precedes job dissatisfaction in career stress narratives"
+    },
+    {
+      "edge_id": "E_F2F_041",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF025",
+      "source_name": "financial_stress",
+      "target_id": "AF015",
+      "target_name": "unemployment",
+      "direction": "directed",
+      "rationale": "Financial stress can precede unemployment due to performance issues"
+    },
+    {
+      "edge_id": "E_F2F_042",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF059",
+      "source_name": "meaninglessness_feeling",
+      "target_id": "AF066",
+      "target_name": "hopelessness_feeling",
+      "direction": "directed",
+      "rationale": "Meaninglessness often precedes hopelessness in alienation attribution sequences"
+    },
+    {
+      "edge_id": "E_F2F_043",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF060",
+      "source_name": "existential_crisis",
+      "target_id": "AF069",
+      "target_name": "spiritual_crisis",
+      "direction": "directed",
+      "rationale": "Existential crisis typically precedes spiritual crisis in alienation narratives"
+    },
+    {
+      "edge_id": "E_F2F_044",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF071",
+      "source_name": "vague_attribution",
+      "target_id": "AF073",
+      "target_name": "attribution_confusion",
+      "direction": "directed",
+      "rationale": "Vague attribution often precedes attribution confusion in no-reason attributions"
+    },
+    {
+      "edge_id": "E_F2F_045",
+      "edge_type": "feature_to_feature",
+      "subtype": "precedes",
+      "source_id": "AF076",
+      "source_name": "general_life_stress",
+      "target_id": "AF077",
+      "target_name": "overwhelm_experience",
+      "direction": "directed",
+      "rationale": "General life stress typically precedes overwhelm in stress attribution sequences"
+    },
+    {
+      "edge_id": "E_F2F_046",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF034",
+      "source_name": "chronic_pain",
+      "target_id": "AF030",
+      "target_name": "substance_abuse",
+      "direction": "directed",
+      "rationale": "Chronic pain intensifies substance abuse as a coping mechanism"
+    },
+    {
+      "edge_id": "E_F2F_047",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF057",
+      "source_name": "loneliness_experience",
+      "target_id": "AF059",
+      "target_name": "meaninglessness_feeling",
+      "direction": "directed",
+      "rationale": "Loneliness intensifies feelings of meaninglessness in alienation contexts"
+    },
+    {
+      "edge_id": "E_F2F_048",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF016",
+      "source_name": "financial_crisis",
+      "target_id": "AF015",
+      "target_name": "unemployment",
+      "direction": "directed",
+      "rationale": "Financial crisis intensifies unemployment stress and job performance issues"
+    },
+    {
+      "edge_id": "E_F2F_049",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF047",
+      "source_name": "childhood_trauma",
+      "target_id": "AF050",
+      "target_name": "trust_issues",
+      "direction": "directed",
+      "rationale": "Childhood trauma intensifies trust issues in relationship attributions"
+    },
+    {
+      "edge_id": "E_F2F_050",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF066",
+      "source_name": "hopelessness_feeling",
+      "target_id": "AF068",
+      "target_name": "learned_helplessness",
+      "direction": "directed",
+      "rationale": "Hopelessness intensifies learned helplessness in depression attributions"
+    },
+    {
+      "edge_id": "E_F2F_051",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF021",
+      "source_name": "burnout_experience",
+      "target_id": "AF022",
+      "target_name": "work_life_imbalance",
+      "direction": "directed",
+      "rationale": "Burnout intensifies work-life imbalance in job stress narratives"
+    },
+    {
+      "edge_id": "E_F2F_052",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF025",
+      "source_name": "financial_stress",
+      "target_id": "AF024",
+      "target_name": "job_insecurity",
+      "direction": "directed",
+      "rationale": "Financial stress intensifies job insecurity in career attributions"
+    },
+    {
+      "edge_id": "E_F2F_053",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF032",
+      "source_name": "chronic_illness",
+      "target_id": "AF035",
+      "target_name": "disability_experience",
+      "direction": "directed",
+      "rationale": "Chronic illness intensifies disability experience in medical attributions"
+    },
+    {
+      "edge_id": "E_F2F_054",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF041",
+      "source_name": "romantic_breakup",
+      "target_id": "AF057",
+      "target_name": "loneliness_experience",
+      "direction": "directed",
+      "rationale": "Romantic breakup intensifies loneliness in relationship attributions"
+    },
+    {
+      "edge_id": "E_F2F_055",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF043",
+      "source_name": "betrayal_experience",
+      "target_id": "AF044",
+      "target_name": "jealousy_problems",
+      "direction": "directed",
+      "rationale": "Betrayal experience intensifies jealousy problems in relationship contexts"
+    },
+    {
+      "edge_id": "E_F2F_056",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF058",
+      "source_name": "social_isolation",
+      "target_id": "AF065",
+      "target_name": "disconnection_feeling",
+      "direction": "directed",
+      "rationale": "Social isolation intensifies disconnection feelings in alienation attributions"
+    },
+    {
+      "edge_id": "E_F2F_057",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF060",
+      "source_name": "existential_crisis",
+      "target_id": "AF070",
+      "target_name": "cosmic_insignificance",
+      "direction": "directed",
+      "rationale": "Existential crisis intensifies feelings of cosmic insignificance"
+    },
+    {
+      "edge_id": "E_F2F_058",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF071",
+      "source_name": "vague_attribution",
+      "target_id": "AF074",
+      "target_name": "complex_etiology",
+      "direction": "directed",
+      "rationale": "Vague attribution intensifies perception of complex etiology"
+    },
+    {
+      "edge_id": "E_F2F_059",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF077",
+      "source_name": "overwhelm_experience",
+      "target_id": "AF072",
+      "target_name": "multiple_stressors",
+      "direction": "directed",
+      "rationale": "Overwhelm experience intensifies the perception of multiple stressors"
+    },
+    {
+      "edge_id": "E_F2F_060",
+      "edge_type": "feature_to_feature",
+      "subtype": "intensifies",
+      "source_id": "AF030",
+      "source_name": "substance_abuse",
+      "target_id": "AF036",
+      "target_name": "withdrawal_symptoms",
+      "direction": "directed",
+      "rationale": "Substance abuse intensifies withdrawal symptoms over time"
+    },
+    {
+      "edge_id": "E_F2F_061",
+      "edge_type": "feature_to_feature",
+      "subtype": "contradicts",
+      "source_id": "AF071",
+      "source_name": "vague_attribution",
+      "target_id": "AF003",
+      "target_name": "physical_abuse",
+      "direction": "undirected",
+      "rationale": "Vague attribution contradicts clear physical abuse in attribution logic"
+    },
+    {
+      "edge_id": "E_F2F_062",
+      "edge_type": "feature_to_feature",
+      "subtype": "contradicts",
+      "source_id": "AF071",
+      "source_name": "vague_attribution",
+      "target_id": "AF005",
+      "target_name": "sexual_abuse",
+      "direction": "undirected",
+      "rationale": "Vague attribution contradicts clear sexual abuse in attribution narratives"
+    },
+    {
+      "edge_id": "E_F2F_063",
+      "edge_type": "feature_to_feature",
+      "subtype": "contradicts",
+      "source_id": "AF073",
+      "source_name": "attribution_confusion",
+      "target_id": "AF015",
+      "target_name": "unemployment",
+      "direction": "undirected",
+      "rationale": "Attribution confusion contradicts clear unemployment event in attributions"
+    },
+    {
+      "edge_id": "E_F2F_064",
+      "edge_type": "feature_to_feature",
+      "subtype": "contradicts",
+      "source_id": "AF075",
+      "source_name": "unclear_onset",
+      "target_id": "AF041",
+      "target_name": "romantic_breakup",
+      "direction": "undirected",
+      "rationale": "Unclear onset contradicts clear romantic breakup event in attributions"
+    },
+    {
+      "edge_id": "E_F2F_065",
+      "edge_type": "feature_to_feature",
+      "subtype": "contradicts",
+      "source_id": "AF078",
+      "source_name": "situational_ambiguity",
+      "target_id": "AF017",
+      "target_name": "workplace_bullying",
+      "direction": "undirected",
+      "rationale": "Situational ambiguity contradicts clear workplace bullying in attribution logic"
+    },
+    {
+      "edge_id": "E_F2F_066",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF057",
+      "source_name": "loneliness_experience",
+      "target_id": "AF058",
+      "target_name": "social_isolation",
+      "direction": "undirected",
+      "rationale": "Loneliness (subjective) overlaps with social isolation (objective) but distinct clinically"
+    },
+    {
+      "edge_id": "E_F2F_067",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF059",
+      "source_name": "meaninglessness_feeling",
+      "target_id": "AF060",
+      "target_name": "existential_crisis",
+      "direction": "undirected",
+      "rationale": "Meaninglessness overlaps with existential crisis but with different clinical nuances"
+    },
+    {
+      "edge_id": "E_F2F_068",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF021",
+      "source_name": "burnout_experience",
+      "target_id": "AF018",
+      "target_name": "job_dissatisfaction",
+      "direction": "undirected",
+      "rationale": "Burnout overlaps with job dissatisfaction but distinct in severity and presentation"
+    },
+    {
+      "edge_id": "E_F2F_069",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF043",
+      "source_name": "betrayal_experience",
+      "target_id": "AF050",
+      "target_name": "trust_issues",
+      "direction": "undirected",
+      "rationale": "Betrayal experience (event) overlaps with trust issues (lasting effect) but clinically distinct"
+    },
+    {
+      "edge_id": "E_F2F_070",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF001",
+      "source_name": "discrimination_experience",
+      "target_id": "AF009",
+      "target_name": "microaggressions",
+      "direction": "undirected",
+      "rationale": "Discrimination experience overlaps with microaggressions but different in scale and intent"
+    },
+    {
+      "edge_id": "E_F2F_071",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF015",
+      "source_name": "unemployment",
+      "target_id": "AF024",
+      "target_name": "job_insecurity",
+      "direction": "undirected",
+      "rationale": "Unemployment overlaps with job insecurity but distinct in actual vs. perceived status"
+    },
+    {
+      "edge_id": "E_F2F_072",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF032",
+      "source_name": "chronic_illness",
+      "target_id": "AF033",
+      "target_name": "cancer_diagnosis",
+      "direction": "undirected",
+      "rationale": "Chronic illness overlaps with cancer diagnosis but different in specificity and prognosis"
+    },
+    {
+      "edge_id": "E_F2F_073",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF041",
+      "source_name": "romantic_breakup",
+      "target_id": "AF042",
+      "target_name": "divorce_experience",
+      "direction": "undirected",
+      "rationale": "Romantic breakup overlaps with divorce experience but different in legal and social context"
+    },
+    {
+      "edge_id": "E_F2F_074",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF047",
+      "source_name": "childhood_trauma",
+      "target_id": "AF056",
+      "target_name": "intergenerational_trauma",
+      "direction": "undirected",
+      "rationale": "Childhood trauma overlaps with intergenerational trauma but distinct in generational scope"
+    },
+    {
+      "edge_id": "E_F2F_075",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF061",
+      "source_name": "powerlessness_feeling",
+      "target_id": "AF068",
+      "target_name": "learned_helplessness",
+      "direction": "undirected",
+      "rationale": "Powerlessness feeling overlaps with learned helplessness but different in learned component"
+    },
+    {
+      "edge_id": "E_F2F_076",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF063",
+      "source_name": "emptiness_feeling",
+      "target_id": "AF064",
+      "target_name": "identity_confusion",
+      "direction": "undirected",
+      "rationale": "Emptiness feeling overlaps with identity confusion but distinct in self-concept focus"
+    },
+    {
+      "edge_id": "E_F2F_077",
+      "edge_type": "feature_to_feature",
+      "subtype": "overlaps-with",
+      "source_id": "AF071",
+      "source_name": "vague_attribution",
+      "target_id": "AF072",
+      "target_name": "multiple_stressors",
+      "direction": "undirected",
+      "rationale": "Vague attribution overlaps with multiple stressors but different in clarity and enumeration"
+    },
+    {
+      "edge_id": "E_F2L_001",
+      "edge_type": "feature_to_label",
+      "source_id": "AF003",
+      "source_name": "physical_abuse",
+      "target_id": "CL002",
+      "target_name": "bias_or_abuse",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Physical abuse is a highly specific indicator for bias_or_abuse attribution in CAMS"
+    },
+    {
+      "edge_id": "E_F2L_002",
+      "edge_type": "feature_to_label",
+      "source_id": "AF005",
+      "source_name": "sexual_abuse",
+      "target_id": "CL002",
+      "target_name": "bias_or_abuse",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Sexual abuse strongly indicates bias_or_abuse label due to clear abuse nature"
+    },
+    {
+      "edge_id": "E_F2L_003",
+      "edge_type": "feature_to_label",
+      "source_id": "AF001",
+      "source_name": "discrimination_experience",
+      "target_id": "CL002",
+      "target_name": "bias_or_abuse",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Discrimination experience is a key diagnostic feature for bias_or_abuse attribution"
+    },
+    {
+      "edge_id": "E_F2L_004",
+      "edge_type": "feature_to_label",
+      "source_id": "AF007",
+      "source_name": "bullying_harassment",
+      "target_id": "CL002",
+      "target_name": "bias_or_abuse",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Bullying harassment is highly specific to bias_or_abuse label in attribution models"
+    },
+    {
+      "edge_id": "E_F2L_005",
+      "edge_type": "feature_to_label",
+      "source_id": "AF004",
+      "source_name": "emotional_abuse",
+      "target_id": "CL002",
+      "target_name": "bias_or_abuse",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Emotional abuse is a strong diagnostic indicator for bias_or_abuse attribution"
+    },
+    {
+      "edge_id": "E_F2L_006",
+      "edge_type": "feature_to_label",
+      "source_id": "AF015",
+      "source_name": "unemployment",
+      "target_id": "CL003",
+      "target_name": "jobs_and_careers",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Unemployment is a highly specific feature for jobs_and_careers label in CAMS"
+    },
+    {
+      "edge_id": "E_F2L_007",
+      "edge_type": "feature_to_label",
+      "source_id": "AF016",
+      "source_name": "financial_crisis",
+      "target_id": "CL003",
+      "target_name": "jobs_and_careers",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Financial crisis strongly indicates jobs_and_careers attribution due to economic focus"
+    },
+    {
+      "edge_id": "E_F2L_008",
+      "edge_type": "feature_to_label",
+      "source_id": "AF017",
+      "source_name": "workplace_bullying",
+      "target_id": "CL003",
+      "target_name": "jobs_and_careers",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Workplace bullying is a key diagnostic feature for jobs_and_careers label"
+    },
+    {
+      "edge_id": "E_F2L_009",
+      "edge_type": "feature_to_label",
+      "source_id": "AF019",
+      "source_name": "academic_failure",
+      "target_id": "CL003",
+      "target_name": "jobs_and_careers",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Academic failure is highly specific to jobs_and_careers attribution in educational contexts"
+    },
+    {
+      "edge_id": "E_F2L_010",
+      "edge_type": "feature_to_label",
+      "source_id": "AF021",
+      "source_name": "burnout_experience",
+      "target_id": "CL003",
+      "target_name": "jobs_and_careers",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Burnout experience is a strong diagnostic indicator for jobs_and_careers label"
+    },
+    {
+      "edge_id": "E_F2L_011",
+      "edge_type": "feature_to_label",
+      "source_id": "AF029",
+      "source_name": "medication_side_effects",
+      "target_id": "CL004",
+      "target_name": "medication",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Medication side effects are highly specific to medication label in CAMS"
+    },
+    {
+      "edge_id": "E_F2L_012",
+      "edge_type": "feature_to_label",
+      "source_id": "AF030",
+      "source_name": "substance_abuse",
+      "target_id": "CL004",
+      "target_name": "medication",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Substance abuse is a key diagnostic feature for medication attribution"
+    },
+    {
+      "edge_id": "E_F2L_013",
+      "edge_type": "feature_to_label",
+      "source_id": "AF032",
+      "source_name": "chronic_illness",
+      "target_id": "CL004",
+      "target_name": "medication",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Chronic illness strongly indicates medication label due to medical nature"
+    },
+    {
+      "edge_id": "E_F2L_014",
+      "edge_type": "feature_to_label",
+      "source_id": "AF033",
+      "source_name": "cancer_diagnosis",
+      "target_id": "CL004",
+      "target_name": "medication",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Cancer diagnosis is highly specific to medication label in attribution models"
+    },
+    {
+      "edge_id": "E_F2L_015",
+      "edge_type": "feature_to_label",
+      "source_id": "AF034",
+      "source_name": "chronic_pain",
+      "target_id": "CL004",
+      "target_name": "medication",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Chronic pain is a strong diagnostic indicator for medication attribution"
+    },
+    {
+      "edge_id": "E_F2L_016",
+      "edge_type": "feature_to_label",
+      "source_id": "AF041",
+      "source_name": "romantic_breakup",
+      "target_id": "CL005",
+      "target_name": "relationship",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Romantic breakup is highly specific to relationship label in CAMS"
+    },
+    {
+      "edge_id": "E_F2L_017",
+      "edge_type": "feature_to_label",
+      "source_id": "AF042",
+      "source_name": "divorce_experience",
+      "target_id": "CL005",
+      "target_name": "relationship",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Divorce experience strongly indicates relationship attribution due to marital context"
+    },
+    {
+      "edge_id": "E_F2L_018",
+      "edge_type": "feature_to_label",
+      "source_id": "AF043",
+      "source_name": "betrayal_experience",
+      "target_id": "CL005",
+      "target_name": "relationship",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Betrayal experience is a key diagnostic feature for relationship label"
+    },
+    {
+      "edge_id": "E_F2L_019",
+      "edge_type": "feature_to_label",
+      "source_id": "AF047",
+      "source_name": "childhood_trauma",
+      "target_id": "CL005",
+      "target_name": "relationship",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Childhood trauma is highly specific to relationship attribution in familial contexts"
+    },
+    {
+      "edge_id": "E_F2L_020",
+      "edge_type": "feature_to_label",
+      "source_id": "AF054",
+      "source_name": "domestic_violence",
+      "target_id": "CL005",
+      "target_name": "relationship",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Domestic violence is a strong diagnostic indicator for relationship label"
+    },
+    {
+      "edge_id": "E_F2L_021",
+      "edge_type": "feature_to_label",
+      "source_id": "AF057",
+      "source_name": "loneliness_experience",
+      "target_id": "CL006",
+      "target_name": "alienation",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Loneliness experience is highly specific to alienation label in CAMS"
+    },
+    {
+      "edge_id": "E_F2L_022",
+      "edge_type": "feature_to_label",
+      "source_id": "AF058",
+      "source_name": "social_isolation",
+      "target_id": "CL006",
+      "target_name": "alienation",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Social isolation strongly indicates alienation attribution due to disconnection focus"
+    },
+    {
+      "edge_id": "E_F2L_023",
+      "edge_type": "feature_to_label",
+      "source_id": "AF059",
+      "source_name": "meaninglessness_feeling",
+      "target_id": "CL006",
+      "target_name": "alienation",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Meaninglessness feeling is a key diagnostic feature for alienation label"
+    },
+    {
+      "edge_id": "E_F2L_024",
+      "edge_type": "feature_to_label",
+      "source_id": "AF060",
+      "source_name": "existential_crisis",
+      "target_id": "CL006",
+      "target_name": "alienation",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Existential crisis is highly specific to alienation attribution in existential contexts"
+    },
+    {
+      "edge_id": "E_F2L_025",
+      "edge_type": "feature_to_label",
+      "source_id": "AF066",
+      "source_name": "hopelessness_feeling",
+      "target_id": "CL006",
+      "target_name": "alienation",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Hopelessness feeling is a strong diagnostic indicator for alienation label"
+    },
+    {
+      "edge_id": "E_F2L_026",
+      "edge_type": "feature_to_label",
+      "source_id": "AF071",
+      "source_name": "vague_attribution",
+      "target_id": "CL001",
+      "target_name": "no_reason",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Vague attribution is highly specific to no_reason label in CAMS"
+    },
+    {
+      "edge_id": "E_F2L_027",
+      "edge_type": "feature_to_label",
+      "source_id": "AF075",
+      "source_name": "unclear_onset",
+      "target_id": "CL001",
+      "target_name": "no_reason",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Unclear onset strongly indicates no_reason attribution due to lack of clarity"
+    },
+    {
+      "edge_id": "E_F2L_028",
+      "edge_type": "feature_to_label",
+      "source_id": "AF078",
+      "source_name": "situational_ambiguity",
+      "target_id": "CL001",
+      "target_name": "no_reason",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Situational ambiguity is a key diagnostic feature for no_reason label"
+    },
+    {
+      "edge_id": "E_F2L_029",
+      "edge_type": "feature_to_label",
+      "source_id": "AF073",
+      "source_name": "attribution_confusion",
+      "target_id": "CL001",
+      "target_name": "no_reason",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Attribution confusion is highly specific to no_reason attribution in CAMS"
+    },
+    {
+      "edge_id": "E_F2L_030",
+      "edge_type": "feature_to_label",
+      "source_id": "AF072",
+      "source_name": "multiple_stressors",
+      "target_id": "CL001",
+      "target_name": "no_reason",
+      "relationship_type": "strong_diagnostic",
+      "direction": "directed",
+      "theoretical_basis": "Multiple stressors strongly indicate no_reason label due to complexity and ambiguity"
+    }
+  ],
+}
