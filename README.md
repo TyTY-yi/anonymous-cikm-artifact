@@ -58,18 +58,6 @@ Multi-label wellness dimension classification dataset.
 
 ---
 
-## Knowledge Graph Artifacts
-
-We provide the anonymized CAMS knowledge graph used in the experiments at:
-
-    cams_kg.json
-
-The graph contains label, semantic, and feature nodes connected by initial binary-prior edges. 
-
-The script `kg_schema_generator.py` documents the two-stage LLM-assisted KG construction protocol used to create task-specific heterogeneous knowledge graphs. It is included to make the construction procedure transparent and inspectable.
-
----
-
 ## Pipeline
 
 The full pipeline consists of five stages.
@@ -112,7 +100,9 @@ Expected outputs:
 
 The script `kg_schema_generator.py` provides a reference implementation of the two-stage LLM-assisted KG construction protocol. Because the graph schema and label definitions are dataset-specific, the prompts and configuration should be adapted to the target dataset before constructing a new KG. 
 
-For the CAMS experiments, we provide the anonymized constructed KG directly at `cams_kg.json`.
+For the CAMS experiments, we provide the anonymized constructed KG directly at:
+
+cams_kg.json
 
 The construction process consists of:
 
